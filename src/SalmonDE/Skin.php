@@ -72,7 +72,7 @@ class Skin extends PluginBase implements Listener
       'JTTW_JTTWSpiderDemon',
       'JTTW_JTTWXuangzang',
       'Festive_FestiveSweaterAlex',
-      'Festive_FestiveMrsClaus',
+      'Festive_FestiveSanta',
       'Festive_FestiveMotherChristmas',
       'Festive_FestiveTomte',
       'Festive_FestivePajamaKid',
