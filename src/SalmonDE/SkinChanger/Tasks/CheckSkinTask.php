@@ -1,18 +1,17 @@
 <?php
 namespace SalmonDE\SkinChanger\Tasks;
 
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat as TF;
 
-class CheckSkinTask extends PluginTask
+class CheckSkinTask extends Task
 {
-  public function __construct($owner, $player, Array $data){
-      parent::__construct($owner);
+  public function __construct($player, Array $data){
       $this->player = $player;
       $this->skindata = $data['SkinData'];
       $this->skinid = $data['SkinID'];
-      $this->lang = $owner->getMessages();
+      $this->lang = $this->getOwner()->getMessages();
   }
 
   public function onRun($currenttick){
