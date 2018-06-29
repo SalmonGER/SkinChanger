@@ -149,7 +149,7 @@ class Skin extends PluginBase implements Listener
       }
   }
 
-  public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
+  public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
       if(strtolower($cmd->getName()) == 'changeskin'){
           if($sender instanceof Player){
               if(isset($args[0])){
@@ -178,9 +178,9 @@ class Skin extends PluginBase implements Listener
                           $target->sendMessage(TF::GREEN.TF::BOLD.$this->getMessages()['ChangeSkin']['SkinChanged']);
                           if($this->getConfig()->get('CheckSkin')){
                               $this->tasks[strtolower($target->getName())] = 1;
-                              $this->getServer()->getScheduler()->scheduleDelayedTask(new CheckSkinTask($this, $target, ['SkinData' => $skin['skindata'], 'SkinID' => $skin['skinid']]), 20 * $this->getConfig()->get('SkinCheckTime'));
+                              $this->getScheduler()->scheduleDelayedTask(new CheckSkinTask($this, $target, ['SkinData' => $skin['skindata'], 'SkinID' => $skin['skinid']]), 20 * $this->getConfig()->get('SkinCheckTime'));
                           }
-                          $this->getServer()->getScheduler()->scheduleDelayedTask(new ShowPlayerTask($this, $target), $this->delay);
+                          $this->getScheduler()->scheduleDelayedTask(new ShowPlayerTask($this, $target), $this->delay);
                       }else{
                           $sender->sendMessage(TF::GOLD.str_replace('{skin}', $args[0], $this->getMessages()['ChangeSkin']['SkinNotFound']));
                       }
@@ -289,9 +289,9 @@ class Skin extends PluginBase implements Listener
                               $event->getPlayer()->sendTip(TF::GREEN.TF::BOLD.$this->getMessages()['ChangeSkin']['SkinChanged']);
                               if($this->getConfig()->get('CheckSkin')){
                                   $this->tasks[strtolower($event->getPlayer()->getName())] = 1;
-                                  $this->getServer()->getScheduler()->scheduleDelayedTask(new CheckSkinTask($this, $event->getPlayer(), ['SkinData' => $joinskin['skindata'], 'SkinID' => $joinskin['skinid']]), 20 * $this->getConfig()->get('SkinCheckTime'));
+                                  $this->getScheduler()->scheduleDelayedTask(new CheckSkinTask($this, $event->getPlayer(), ['SkinData' => $joinskin['skindata'], 'SkinID' => $joinskin['skinid']]), 20 * $this->getConfig()->get('SkinCheckTime'));
                               }
-                              $this->getServer()->getScheduler()->scheduleDelayedTask(new ShowPlayerTask($this, $event->getPlayer()), $this->delay);
+                              $this->getScheduler()->scheduleDelayedTask(new ShowPlayerTask($this, $event->getPlayer()), $this->delay);
                           }else{
                               $this->getLogger()->error(TF::RED.str_replace('{skin}', $joinskin['skinid'], $this->getMessages()['General']['SkinIDNotFound']));
                           }
@@ -319,12 +319,12 @@ class Skin extends PluginBase implements Listener
           $groupcapes = $this->getConfig()->get('Rank-Capes');
           if(isset($groupcapes[$group])){
               if(in_array($event->getPlayer()->getSkinId(), $this->femaleskinids)){
-                  $this->getServer()->getScheduler()->scheduleDelayedTask(new RankCapeTask($this, $event->getPlayer(), $this->getCape($this->getConfig()->get('Rank-Capes')[$group], 'Alex')), 40);
+                  $this->getScheduler()->scheduleDelayedTask(new RankCapeTask($this, $event->getPlayer(), $this->getCape($this->getConfig()->get('Rank-Capes')[$group], 'Alex')), 40);
                   if(isset($this->pskins[strtolower($event->getPlayer()->getName())])){
                       $this->pskins[strtolower($event->getPlayer()->getName())]['skinid'] = $this->getCape($this->getConfig()->get('Rank-Capes')[$group], 'Alex');
                   }
               }else{
-                  $this->getServer()->getScheduler()->scheduleDelayedTask(new RankCapeTask($this, $event->getPlayer(), $this->getCape($this->getConfig()->get('Rank-Capes')[$group], 'Steve')), 40);
+                  $this->getScheduler()->scheduleDelayedTask(new RankCapeTask($this, $event->getPlayer(), $this->getCape($this->getConfig()->get('Rank-Capes')[$group], 'Steve')), 40);
                   if(isset($this->pskins[strtolower($event->getPlayer()->getName())])){
                       $this->pskins[strtolower($event->getPlayer()->getName())]['skinid'] = $this->getCape($this->getConfig()->get('Rank-Capes')[$group], 'Steve');
                   }
