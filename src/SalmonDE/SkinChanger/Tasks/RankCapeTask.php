@@ -2,13 +2,12 @@
 namespace SalmonDE\SkinChanger\Tasks;
 
 use pocketmine\Player;
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 
-class RankCapeTask extends PluginTask
+class RankCapeTask extends Task
 {
 
     public function __construct($owner, Player $player, $skinid){
-        parent::__construct($owner);
         $this->player = $player;
         $this->skinid = $skinid;
     }
