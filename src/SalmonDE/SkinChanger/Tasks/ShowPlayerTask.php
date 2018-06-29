@@ -2,13 +2,12 @@
 namespace SalmonDE\SkinChanger\Tasks;
 
 use pocketmine\Player;
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 
-class ShowPlayerTask extends PluginTask
+class ShowPlayerTask extends Task
 {
 
     public function __construct($owner, Player $player){
-        parent::__construct($owner);
         $this->player = $player;
     }
 
